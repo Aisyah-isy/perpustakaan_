@@ -1,0 +1,31 @@
+<a href="<?= base_url('peminjam/detail_buku/' . $b['buku_id']) ?>" class="add_cart">detail</a>
+<?php if ($this->Model->isDipesan($b['buku_id']) == NULL) { ?>
+	<a href="<?= base_url('peminjam/pinjam/' . $b['buku_id']) ?>" class="add_cart">+ pinjam</i></a>
+<?php } elseif ($this->Model->isDipesan($b['buku_id']) != NULL) { ?>
+	<a class="add_cart">Dalam pengajuan</a>
+<?php } elseif ($this->Model->isPinjam($b['buku_id']) == true) { ?>
+	<a class="add_cart">Dipinjam</a>
+<?php } ?>
+
+<?php if ($this->Model->cek_koleksi($b['buku_id']) == NULL) { ?>
+	<a href="<?= base_url('peminjam/add_koleksi/' . $b['buku_id']) ?>" class="add_cart"><i class="ti-heart"></i></a>
+<?php } else if ($this->Model->cek_koleksi($b['buku_id']) != NULL) { ?>
+	<a class="add_cart"><i class="ti-check"></i></a>
+<?php } ?>
+
+<?php if ($this->Model->cek_pinjam($s['peminjaman_id'], $s['buku_id']) == true) { ?>
+	<ul class="list-group mb-2">
+		<li class="list-group-item d-flex align-items-center">
+			<i class="bx bx-user me-2"></i>
+			Peminjam : <?= $s['peminjam_username'] ?>
+		</li>
+		<li class="list-group-item d-flex align-items-center">
+			<i class="bx bx-table me-2"></i>
+			Tanggal Pinjam : <?= $s['tanggal_pinjam'] ?>
+		</li>
+		<li class="list-group-item d-flex align-items-center">
+			<i class="bx bx-table me-2"></i>
+			Batas Pengembalian : <?= $s['batas_pengembalian'] ?>
+		</li>
+	</ul>
+<?php } ?>
